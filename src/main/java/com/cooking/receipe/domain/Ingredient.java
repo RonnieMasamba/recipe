@@ -13,6 +13,20 @@ public class Ingredient {
     private String description;
     private BigDecimal amount;
 
+
+    @ManyToOne(fetch =FetchType.LAZY)
+    private Receipe recipe;
+
+    @OneToOne
+    private UnitOfMeasure unitOfMeasure;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    private Notes note;
+
+    public Receipe getRecipe() {return recipe; }
+
+    public void setRecipe(Receipe recipe) {  this.recipe = recipe;}
+
     public long getId(){return id;}
 
     public void setId(long id){this.id = id;}
@@ -25,5 +39,11 @@ public class Ingredient {
 
     public void setAmount(BigDecimal amount) { this.amount = amount;}
 
+    public Notes getNote() { return note; }
+
+    public void setNote(Notes note) {   this.note = note;}
+
+
 
 }
+

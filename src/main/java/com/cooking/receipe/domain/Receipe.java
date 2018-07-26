@@ -18,24 +18,27 @@ public class Receipe {
     private String url;
     private String directions;
 
+    @ManyToMany
+    @JoinTable(name="recipe_category",
+    joinColumns = @JoinColumn(name="recipe_id"),
+    inverseJoinColumns = @JoinColumn(name="category_id"))
+    private Set<Category>category;
+
     @Lob
     private Byte[] image;
 
-   // @Enumerated(EnumType.STRING)
-   // private Difficulty difficulty;
+    @Enumerated(EnumType.STRING)
+    private Difficulty difficulty;
 
-    // private Set<Ingredient> ingredient;
+    @OneToMany(cascade=CascadeType.ALL,mappedBy ="recipe" )
+    private Set<Ingredient>  ingredient;
 
-    // private Notes notes;
+    @OneToOne
+    private Notes notes;
 
+    public long getId() { return id; }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+    public void setId(long id) { this.id = id;    }
 
     public String getPrepTime() {
         return prepTime;
@@ -93,5 +96,20 @@ public class Receipe {
         this.image = image;
     }
 
+    public Set<Ingredient> getIngredient() { return ingredient;  }
+
+    public void setIngredient(Set<Ingredient> ingredient) { this.ingredient = ingredient;}
+
+    public Notes getNotes() {  return notes;}
+
+    public void setNotes(Notes notes) {  this.notes = notes;    }
+
+    public Set<Category> getCategory() {   return category; }
+
+    public void setCategory(Set<Category> category) {  this.category = category;    }
+
+    public Difficulty getDifficulty() {  return difficulty;    }
+
+    public void setDifficulty(Difficulty difficulty) { this.difficulty = difficulty; }
 }
 

@@ -1,9 +1,6 @@
 package com.cooking.receipe.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -14,11 +11,18 @@ public class Category {
     private long id;
     private String departmentName;
 
+    @ManyToMany(mappedBy = "category")
+    private Set<Receipe>recipe;
+
     public long getId() {   return id ; }
 
     public void setId(long id) { this.id = id;  }
 
     public String getDepartmentName() { return departmentName; }
 
-    public void setDepartmentName(String departmentName) {    this.departmentName = departmentName;    }
+    public void setDepartmentName(String departmentName) {    this.departmentName = departmentName;}
+
+    public Set<Receipe> getRecipe() {  return recipe; }
+
+    public void setRecipe(Set<Receipe> recipe) { this.recipe = recipe;}
 }

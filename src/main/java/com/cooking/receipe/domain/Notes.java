@@ -12,8 +12,8 @@ public class Notes {
     @Lob
     private String notes;
 
-
-    // private Receipe receipe;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Receipe receipe;
 
     public long getId() {
         return id;
@@ -31,4 +31,7 @@ public class Notes {
         this.notes = notes;
     }
 
-}
+    public Receipe getReceipe() { return receipe;
+    }
+
+    public void setReceipe(Receipe receipe) {  this.receipe = receipe;}    }
