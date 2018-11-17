@@ -20,7 +20,7 @@ public class Category {
 
     public String getDepartmentName() { return description; }
 
-    public void setDepartmentName(String departmentName) {    this.description = description;}
+    public void setDepartmentName(String departmentName) {  this.description = description;}
 
     public Set<Receipe> getRecipe() {  return recipe; }
 

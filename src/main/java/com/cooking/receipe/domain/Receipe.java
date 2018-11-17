@@ -2,6 +2,7 @@ package com.cooking.receipe.domain;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -11,18 +12,19 @@ public class Receipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String prepTime;
-    private String cookTime;
-    private Integer servings;
-    private String source;
-    private String url;
+    private String description;
     private String directions;
+    private Integer prepTime;
+    private Integer cookTime;
+    private Integer servings;
+    private String url;
+
 
     @ManyToMany
     @JoinTable(name="recipe_category",
     joinColumns = @JoinColumn(name="recipe_id"),
     inverseJoinColumns = @JoinColumn(name="category_id"))
-    private Set<Category>category;
+    private Set<Category>category = new HashSet<>();
 
     @Lob
     private Byte[] image;
@@ -31,7 +33,9 @@ public class Receipe {
     private Difficulty difficulty;
 
     @OneToMany(cascade=CascadeType.ALL,mappedBy ="recipe" )
-    private Set<Ingredient>  ingredient;
+    private Set<Ingredient>  ingredient = new HashSet<>();
+
+
 
     @OneToOne
     private Notes notes;
@@ -40,19 +44,19 @@ public class Receipe {
 
     public void setId(long id) { this.id = id;    }
 
-    public String getPrepTime() {
+    public Integer getPrepTime() {
         return prepTime;
     }
 
-    public void setPrepTime(String prepTime) {
+    public void setPrepTime(Integer prepTime) {
         this.prepTime = prepTime;
     }
 
-    public String getCookTime() {
+    public Integer getCookTime() {
         return cookTime;
     }
 
-    public void setCookTime(String cookTime) {
+    public void setCookTime(Integer cookTime) {
         this.cookTime = cookTime;
     }
 
@@ -65,11 +69,11 @@ public class Receipe {
     }
 
     public String getSource() {
-        return source;
+        return description;
     }
 
     public void setSource(String source) {
-        this.source = source;
+        this.description = source;
     }
 
     public String getUrl() {
@@ -96,13 +100,14 @@ public class Receipe {
         this.image = image;
     }
 
+
     public Set<Ingredient> getIngredient() { return ingredient;  }
 
     public void setIngredient(Set<Ingredient> ingredient) { this.ingredient = ingredient;}
 
     public Notes getNotes() {  return notes;}
 
-    public void setNotes(Notes notes) {  this.notes = notes;    }
+    public void setNotes(Notes notes) {this. notes.setReceipe(this);}
 
     public Set<Category> getCategory() {   return category; }
 
